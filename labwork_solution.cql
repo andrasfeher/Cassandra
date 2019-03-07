@@ -77,3 +77,33 @@ create materialized view IF NOT EXISTS sales_by_user as
 select * from sale
 where sale_id is not null and user_id is not null
 primary key((user_id), sale_id) with clustering order by (sale_id desc);
+
+
+create table if not exists page_hit_counter_by_url_and_date(
+    url text,
+    capture_date date,
+    capture_time time,
+    source_ip inet,
+    primary key((url,capture_date), capture_time) 	
+);
+
+
+truncate page_hit_counter_by_url_and_date;
+
+insert into page_hit_counter_by_url_and_date ( url, capture_date, capture_time, source_ip)
+values ( 'https://msdf.com/index', '2018-04-03', '13:30:54', 	'127.0.0.1');
+
+insert into page_hit_counter_by_url_and_date ( url, capture_date, capture_time, source_ip)
+values ( 'https://msdf.com/index', '2018-04-03', '14:30:54', 	'127.0.0.1');
+
+insert into page_hit_counter_by_url_and_date ( url, capture_date, capture_time, source_ip)
+values ( 'https://msdf.com/index', '2018-04-04', '13:30:54', 	'127.0.0.1');
+
+insert into page_hit_counter_by_url_and_date ( url, capture_date, capture_time, source_ip)
+values ( 'https://msdf.com/index', '2018-04-05', '13:30:54', 	'127.0.0.1');
+
+
+select * from page_hit_counter_by_url_and_date 
+where url = 'https://msdf.com/index' 
+and capture_date = '2018-04-03'
+and capture_time > '14:00:00' and capture_time < '15:00:00';
