@@ -6,5 +6,5 @@ unzip master.zip
 
 cd Cassandra-master
 
-cqlsh -f <filename>.cql
+cqlsh -f \<filename\>.cql
 
