@@ -50,7 +50,7 @@ insert into contact(
                 {email_type: 'work', email_address: 'jdoe@obuda.com'},
                 {email_type: 'private', email_address: 'jdoe@test.com'}
         ],
-        dateOf(now())
+        toTimeStamp(toDate(now()))
 );
 
 
