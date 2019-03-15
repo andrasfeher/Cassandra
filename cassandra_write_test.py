@@ -4,6 +4,19 @@ from cassandra.cluster import Cluster, BatchStatement
 from cassandra.query import SimpleStatement
 from datetime import datetime
 
+'''
+drop keyspace mykeyspace;
+
+CREATE KEYSPACE mykeyspace
+WITH replication = {
+ 	'class' : 'NetworkTopologyStrategy',
+	'Budapest' : 2,
+	'New York' : 1
+};
+
+CREATE TABLE mykeyspace.tbl (id int primary key)
+'''
+
 if __name__ == '__main__':
     cluster = Cluster(['localhost'])
     session = cluster.connect('mykeyspace')
